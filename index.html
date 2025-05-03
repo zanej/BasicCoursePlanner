@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Planner</title>
+</head>
+<body>
+    <h1>Course Planner</h1>
+
+    <h2>Add a Course</h2>
+    <form method="POST" action="/add_course">
+        Code: <input name="code"><br>
+        Title: <input name="title"><br>
+        Credits: <input name="credits"><br>
+        Category: <input name="category"><br>
+        <input type="submit" value="Add Course">
+    </form>
+
+    <h2>Create Schedule</h2>
+    <form method="POST" action="/create_schedule">
+        Schedule Name: <input name="name"><br>
+        {% for course in courses %}
+            <input type="checkbox" name="courses" value="{{ course.id }}"> {{ course.title }} ({{ course.code }})<br>
+        {% endfor %}
+        <input type="submit" value="Create Schedule">
+    </form>
+
+    <h2>Existing Schedules</h2>
+    <ul>
+        {% for schedule in schedules %}
+            <li><strong>{{ schedule.name }}</strong>: {{ schedule.courses | length }} courses</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
